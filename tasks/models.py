@@ -6,7 +6,7 @@ import datetime
 class Task(models.Model):
   title = models.CharField(max_length=64)
   description = models.TextField(max_length=2048)
-  category = models.ForeignKey('category', on_delete=models.CASCADE)
+  category = models.ForeignKey('Category', on_delete=models.CASCADE)
   assignedTo = models.ManyToManyField(settings.AUTH_USER_MODEL)
   dueDate = models.DateField(null=True, blank=True)
   priority = models.PositiveSmallIntegerField(default=1)
@@ -16,14 +16,14 @@ class Task(models.Model):
   def __str__(self): #Overview in adminpanel
     return str(str(self.id) +": " + self.title + ", " + str(self.priority))
 
-class category(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=32)
     color = models.CharField(max_length=32)
 
     def __str__(self): #Overview in adminpanel
         return self.name
 
-class subtask(models.Model):
+class Subtask(models.Model):
     description = models.CharField(max_length=256)
     state = models.BooleanField(default=False)
     task = models.ForeignKey('Task', on_delete=models.CASCADE)
