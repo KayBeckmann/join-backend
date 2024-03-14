@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import TodoItem, category, subtask
+from .models import Task, category, subtask
 
-admin.site.register(TodoItem)
+admin.site.register(Task)
 admin.site.register(category)
 admin.site.register(subtask)

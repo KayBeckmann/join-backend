@@ -3,7 +3,7 @@ from django.conf import settings
 import datetime
 
 # Create your models here.
-class TodoItem(models.Model):
+class Task(models.Model):
   title = models.CharField(max_length=64)
   description = models.TextField(max_length=2048)
   category = models.ForeignKey('category', on_delete=models.CASCADE)
@@ -26,7 +26,7 @@ class category(models.Model):
 class subtask(models.Model):
     description = models.CharField(max_length=256)
     state = models.BooleanField(default=False)
-    task = models.ForeignKey('TodoItem', on_delete=models.CASCADE)
+    task = models.ForeignKey('Task', on_delete=models.CASCADE)
 
     def __str__(self): #Overview in adminpanel
         return self.description
