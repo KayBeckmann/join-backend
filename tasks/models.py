@@ -6,12 +6,12 @@ import datetime
 class Task(models.Model):
   title = models.CharField(max_length=64)
   description = models.TextField(max_length=2048)
+  state = models.PositiveSmallIntegerField(default=0)
   category = models.ForeignKey('Category', on_delete=models.CASCADE)
   assignedTo = models.ManyToManyField(settings.AUTH_USER_MODEL)
   dueDate = models.DateField(null=True, blank=True)
   priority = models.PositiveSmallIntegerField(default=1)
   created_at = models.DateField(default=datetime.date.today)
-  
   
   def __str__(self): #Overview in adminpanel
     return str(str(self.id) +": " + self.title + ", " + str(self.priority))
