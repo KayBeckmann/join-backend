@@ -29,3 +29,21 @@ class TaskView(APIView):
     tasks = Task.objects.all()
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
+
+class CategoryView(APIView):
+  #authentication_classes = [TokenAuthentication]
+  #permission_classes = [IsAuthenticated]
+  
+  def get(self, request, format=None):
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)
+
+class SubtaskView(APIView):
+  #authentication_classes = [TokenAuthentication]
+  #permission_classes = [IsAuthenticated]
+  
+  def get(self, request, format=None):
+    subtasks = Subtask.objects.all()
+    serializer = SubtaskSerializer(subtasks, many=True)
+    return Response(serializer.data)
