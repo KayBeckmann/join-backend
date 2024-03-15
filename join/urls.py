@@ -5,5 +5,5 @@ from tasks.views import LoginView, TaskView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('tasks.urls')),
-    path('auth/', include('auth.urls')),
+    path('auth/', include('authentication.urls')),
 ]
