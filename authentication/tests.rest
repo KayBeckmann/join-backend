@@ -8,10 +8,11 @@ Content-Type: application/json
 POST http://127.0.0.1:8000/auth/login/
 Content-Type: application/json
 
-{ "username": "adam", "password": "Pass1234!" }
+#{ "username": "adam", "password": "Pass1234!" }
+{ "username": "kay", "password": "11111111" }
 
 ###
 
 GET http://127.0.0.1:8000/auth/test_token/
 Content-Type: application/json
-Authorization: token xxx
+Authorization: token 987c97bc1e058d212c23a32722d5fcdf098679e2
