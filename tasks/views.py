@@ -7,8 +7,6 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Task, Category, Subtask
 from .serializers import UserSerializer, TaskSerializer, CategorySerializer, SubtaskSerializer
 
-
-# Create your views here.
 class LoginView(ObtainAuthToken):
   def post(self, request, *args, **kwargs):
     serializer = self.serializer_class(data=request.data, context={'request':request})
@@ -22,8 +20,8 @@ class LoginView(ObtainAuthToken):
     })
     
 class TaskView(APIView):
-  #authentication_classes = [TokenAuthentication]
-  #permission_classes = [IsAuthenticated]
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
   
   def get(self, request, format=None):
     tasks = Task.objects.all()
@@ -31,8 +29,8 @@ class TaskView(APIView):
     return Response(serializer.data)
 
 class CategoryView(APIView):
-  #authentication_classes = [TokenAuthentication]
-  #permission_classes = [IsAuthenticated]
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
   
   def get(self, request, format=None):
     categories = Category.objects.all()
@@ -40,8 +38,8 @@ class CategoryView(APIView):
     return Response(serializer.data)
 
 class SubtaskView(APIView):
-  #authentication_classes = [TokenAuthentication]
-  #permission_classes = [IsAuthenticated]
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
   
   def get(self, request, format=None):
     subtasks = Subtask.objects.all()
