@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import Task, Category, Subtask
-from .serializers import UserSerializer, TaskSerializer, CategorySerializer, SubtaskSerializer
+from .serializers import UserSerializer, TaskAllSerializer, TaskOverviewSerializer, CategorySerializer, SubtaskSerializer
 
 class LoginView(ObtainAuthToken):
   def post(self, request, *args, **kwargs):
@@ -25,7 +25,16 @@ class TaskView(APIView):
   
   def get(self, request, format=None):
     tasks = Task.objects.all()
-    serializer = TaskSerializer(tasks, many=True)
+    serializer = TaskAllSerializer(tasks, many=True)
+    return Response(serializer.data)
+
+class TaskOverview(APIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
+
+  def get(self, request, format=None):
+    tasks = Task.objects.all()
+    serializer = TaskOverviewSerializer(tasks, many=True)
     return Response(serializer.data)
 
 class CategoryView(APIView):

@@ -7,10 +7,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     model = User
     fields = ['id', 'username']
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskAllSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = '__all__'
+
+class TaskOverviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ['id', 'title', 'state', 'category', 'priority']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
