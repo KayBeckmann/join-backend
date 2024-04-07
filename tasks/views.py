@@ -19,10 +19,10 @@ class LoginView(ObtainAuthToken):
       'email': user.email
     })
     
-    # path('task/', views.TaskList.as_view(), name='tasklist'),
-    # path('task/<int:pk>/', views.TaskDetail.as_view(), name='taskdetail'),
-
 class TaskList(generics.ListCreateAPIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
+
   serializer_class = TaskOverviewSerializer
 
   def get_queryset(self):
@@ -33,41 +33,37 @@ class TaskList(generics.ListCreateAPIView):
     return queryset
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
   serializer_class = TaskAllSerializer
   queryset = Task.objects.all()
 
-# class TaskList(APIView):
-  # authentication_classes = [TokenAuthentication]
-  # permission_classes = [IsAuthenticated]
-  # 
-  # def get(self, request, format=None):
-    # tasks = Task.objects.all()
-    # serializer = TaskAllSerializer(tasks, many=True)
-    # return Response(serializer.data)
+class CategoryList(generics.ListCreateAPIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
+  serializer_class = CategorySerializer
+  queryset = Category.objects.all()
 
-# class TaskOverview(APIView):
-  # authentication_classes = [TokenAuthentication]
-  # permission_classes = [IsAuthenticated]
-# 
-  # def get(self, request, format=None):
-    # tasks = Task.objects.all()
-    # serializer = TaskOverviewSerializer(tasks, many=True)
-    # return Response(serializer.data)
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
+  serializer_class = CategorySerializer
+  queryset = Category.objects.all()
 
-# class CategoryView(APIView):
-  # authentication_classes = [TokenAuthentication]
-  # permission_classes = [IsAuthenticated]
-  # 
-  # def get(self, request, format=None):
-    # categories = Category.objects.all()
-    # serializer = CategorySerializer(categories, many=True)
-    # return Response(serializer.data)
-# 
-# class SubtaskView(APIView):
-  # authentication_classes = [TokenAuthentication]
-  # permission_classes = [IsAuthenticated]
-  # 
-  # def get(self, request, format=None):
-    # subtasks = Subtask.objects.all()
-    # serializer = SubtaskSerializer(subtasks, many=True)
-    # return Response(serializer.data)
+class SubtaskList(generics.ListCreateAPIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
+  serializer_class = SubtaskSerializer
+  
+  def get_queryset(self):
+    queryset = Subtask.objects.all()
+    task = self.request.query_params.get('task')
+    if task is not None:
+      queryset = queryset.filter(subtaskTask=task)
+      return queryset
+
+class SubtaskDetail(generics.RetrieveUpdateDestroyAPIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
+  serializer_class = SubtaskSerializer
+  queryset = Subtask.objects.all()

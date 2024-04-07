@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group
 class UserSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = User
-    fields = ['id', 'username']
+    fields = ['id', 'username', 'firstname', 'lastname', 'email']
 
 class TaskAllSerializer(serializers.ModelSerializer):
     class Meta:
