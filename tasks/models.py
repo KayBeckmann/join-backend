@@ -10,7 +10,7 @@ class Task(models.Model):
   category = models.ForeignKey('Category', on_delete=models.CASCADE)
   assignedTo = models.ManyToManyField(settings.AUTH_USER_MODEL)
   dueDate = models.DateField(null=True, blank=True)
-  priority = models.PositiveSmallIntegerField(default=1)
+  priority = models.PositiveSmallIntegerField(default=0)
   created_at = models.DateField(default=datetime.date.today)
   
   def __str__(self): #Overview in adminpanel
