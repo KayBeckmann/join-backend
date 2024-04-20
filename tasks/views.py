@@ -54,13 +54,14 @@ class SubtaskList(generics.ListCreateAPIView):
   authentication_classes = [TokenAuthentication]
   permission_classes = [IsAuthenticated]
   serializer_class = SubtaskSerializer
+  queryset = Subtask.objects.all()
   
-  def get_queryset(self):
-    queryset = Subtask.objects.all()
-    task = self.request.query_params.get('task')
-    if task is not None:
-      queryset = queryset.filter(subtaskTask=task)
-      return queryset
+  # def get_queryset(self):
+    # queryset = Subtask.objects.all()
+    # task = self.request.query_params.get('task')
+    # if task is not None:
+      # queryset = queryset.filter(subtaskTask=task)
+      # return queryset
 
 class SubtaskDetail(generics.RetrieveUpdateDestroyAPIView):
   authentication_classes = [TokenAuthentication]
