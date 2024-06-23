@@ -15,7 +15,7 @@ class TaskAllSerializer(serializers.ModelSerializer):
 class TaskOverviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'title', 'state', 'category', 'priority']
+        fields = ['id', 'title', 'state', 'category', 'priority', 'countSubtasks']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

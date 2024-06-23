@@ -12,6 +12,8 @@ class Task(models.Model):
   dueDate = models.DateField(null=True, blank=True)
   priority = models.PositiveSmallIntegerField(default=0)
   created_at = models.DateField(default=datetime.date.today)
+  subtasks = models.CharField(max_length=4098, null=True, blank=True)
+  countSubtasks = models.PositiveSmallIntegerField(default=0)
   
   def __str__(self): #Overview in adminpanel
     return str(str(self.id) +": " + self.title + ", " + str(self.priority))
