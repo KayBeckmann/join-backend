@@ -1,2 +1,4 @@
 *.sqlite3
 env/
+*/migrations/
+__init__.py
