@@ -84,6 +84,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'api.User'  # Ersetze 'your_app_name' mit deinem App-Namen
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
